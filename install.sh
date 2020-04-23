@@ -57,24 +57,30 @@ if ! [ -d  "tar"  ]; then
 rm  -R         ubuntu/boot ubuntu/dev ubuntu/etc/fonts ubuntu/home   ubuntu/root ubuntu/tmp \
                ubuntu/var/log  ubuntu/var/tmp 
 
- 
-
-mkdir -p                                   ubuntu/dev/shm
-   
-
+ln -s    bash                              ubuntu/bin/sh
+rm                                         ubuntu/lib64/ld-linux-x86-64.so.2
+ln -s ../lib/x86_64-linux-gnu/ld-2.19.so   ubuntu/lib64/ld-linux-x86-64.so.2
 
 
 
- 
+                 cp /compat/linux/usr/lib/$(ls /compat/linux/usr/lib/ | grep libGL.so | head -3 | tail -n 1) ubuntu/usr/lib
+                 cp /compat/linux/usr/lib/$(ls /compat/linux/usr/lib/ | grep libnvidia-glcore) ubuntu/usr/lib
+                 cp /compat/linux/usr/lib/$(ls /compat/linux/usr/lib/ | grep libnvidia-tls) ubuntu/usr/lib
+                 cp /compat/linux/usr/lib/$(ls /compat/linux/usr/lib/ | grep libGLX) ubuntu/usr/lib
+                 cp /compat/linux/usr/lib/$(ls /compat/linux/usr/lib/ | grep libGLdispatch.so.0.0.0) ubuntu/usr/lib
+                 cp /compat/linux/usr/lib/$(ls /compat/linux/usr/lib/ | grep libGLX.so.0.0.0  ) ubuntu/usr/lib
+                 ln -s  $(ls /compat/linux/usr/lib/ | grep libGLX.so.0.0.0  )                           ubuntu/usr/lib/libGLX.so.0
+                 ln -s  $(ls /compat/linux/usr/lib/ | grep libGLdispatch.so.0.0.0)                      ubuntu/usr/lib/libGLdispatch.so.0
+                 ln -s  $(ls /compat/linux/usr/lib/ | grep libGL.so | head -3 | tail -n 1)              ubuntu/usr/lib/libGL.so.1             
 
 
 
 
-    
 doas cp -R  ubuntu /compat
 doas mkdir  /compat/ubuntu/tmp
 doas mkdir  /compat/ubuntu/proc
 doas mkdir  /compat/ubuntu/sys
+doas mkdir -p   /compat/ubuntu/dev/shm
 
 
 

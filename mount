@@ -2,15 +2,12 @@
 
 
 
+mount_ubuntu() 
 
-
+{
   #unmount  /compat/linux/proc if mounted
        
       
-         
-
-
-
       if ! [ -z "$(mount | grep linprocfs)" ]; then 
        
            doas   umount  /compat/linux/proc
@@ -18,11 +15,6 @@
       fi
                  
            
-
-
-
- 
-
     if  [ -z "$(mount | grep nullfs )" ]; then 
        
        doas mount -t nullfs /compat/ubuntu/ /compat/linux/
@@ -55,18 +47,15 @@
    fi
 
 
-
-       
        doas chmod 1777 /compat/linux/dev/shm
     
-  
+ } 
 
 
           
-echo -n "нажмите enter что бы отмонтировать разделы "
-read text
-   
 
+umount () 
+  {    
        doas umount -f  /compat/linux/proc
        doas umount -f  /compat/linux/dev/shm
        doas umount -f  /compat/linux/sys
@@ -80,6 +69,19 @@ read text
           
      
       fi
+  }
+
+  
+case $1 in 
+   -m) 
+   mount_ubuntu 
+       ;; 
+   -u) 
+     umount 
+      ;; 
+   
+esac 
 
 
-       
+
+     
