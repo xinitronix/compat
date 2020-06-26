@@ -1,0 +1,13 @@
+#!/bin/sh
+
+doas sysctl compat.linux.osrelease=3.6.38
+  
+
+
+ for DEB in $(cat 1);do
+
+            cd deb && fetch $DEB
+            doas dpkg --extract $(echo $DEB   | rev | sed -r 's/\/.+//' | rev) /compat/ubuntu          
+            cd ../
+
+                 done

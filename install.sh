@@ -74,7 +74,7 @@ ln -s ../lib/x86_64-linux-gnu/ld-2.19.so   ubuntu/lib64/ld-linux-x86-64.so.2
                  ln -s  $(ls /compat/linux/usr/lib/ | grep libGL.so | head -3 | tail -n 1)              ubuntu/usr/lib/libGL.so.1             
 
 
-
+doas sysctl compat.linux.osrelease=3.6.38
 
 doas cp -R  ubuntu /compat
 doas mkdir  /compat/ubuntu/tmp

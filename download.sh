@@ -1,10 +1,10 @@
 #!/bin/sh
 
-distro=bionic
+distro=eoan
 
 
-    pak=$(curl  "https://packages.ubuntu.com/$distro/i386/$1/download"  |   grep  de.archive.ubuntu.com | grep -Eo 'href="[^\"]+"' | grep -Eo '(http|https)://[^"]+')
-    pak2=$(curl "https://packages.ubuntu.com/$distro/i386/$1/download" |   grep http://security.ubuntu.com | grep -Eo 'href="[^\"]+"' | grep -Eo '(http|https)://[^"]+')
+    pak=$(curl  "https://packages.ubuntu.com/$distro/amd64/$1/download"  |   grep  de.archive.ubuntu.com | grep -Eo 'href="[^\"]+"' | grep -Eo '(http|https)://[^"]+')
+    pak2=$(curl "https://packages.ubuntu.com/$distro/amd64/$1/download" |   grep http://security.ubuntu.com | grep -Eo 'href="[^\"]+"' | grep -Eo '(http|https)://[^"]+')
 
 
    if ! [ -d  "ubuntu"  ]; then
